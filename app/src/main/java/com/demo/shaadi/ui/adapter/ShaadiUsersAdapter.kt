@@ -1,6 +1,7 @@
 package com.demo.shaadi.ui.adapter
 
 import android.annotation.SuppressLint
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -32,6 +33,7 @@ class ShaadiUsersAdapter(private var users: List<ShaadiUser>, val onAcceptDeclin
     override fun onBindViewHolder(holder: RestaurantViewHolder, position: Int) {
         with(holder) {
             with(users[position]){
+                Log.d("data at scroll", "status : $status")
                 binding.tvUserName.text = name
                 binding.tvUserAge.text = "$age Y"
                 binding.tvUserLocation.text = location
@@ -52,8 +54,8 @@ class ShaadiUsersAdapter(private var users: List<ShaadiUser>, val onAcceptDeclin
                         tempUser.status = Constants.USER_ACCEPTED
                         onAcceptDeclineListener.onClick(tempUser)
                     }
-                    tempUser.status = Constants.USER_DECLINED
                     binding.tvDecline.setOnClickListener {
+                        tempUser.status = Constants.USER_DECLINED
                         onAcceptDeclineListener.onClick(tempUser)
                     }
                 }

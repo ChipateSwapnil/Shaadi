@@ -53,21 +53,22 @@ class HomeActivity : AppCompatActivity(), ShaadiUsersAdapter.OnAcceptDeclineList
                 is NetworkResponse.Success<*> -> {
                     binding.progressBar.visibility = View.GONE
                     binding.tvError.visibility = View.GONE
+                    binding.tvRetry.visibility = View.GONE
                 }
-                is NetworkResponse.ConnectionError -> displayError(it.errorMessage, true)
-                is NetworkResponse.Error -> displayError(it.errorMessage, false)
+                is NetworkResponse.ConnectionError -> displayError(it.errorMessage)
+                is NetworkResponse.Error -> displayError(it.errorMessage)
             }
         })
 
         homeViewModel.localUserResult.observe(this) {
-            Log.d("Sankett Error", "size: ${it.size}")
             if(it.isEmpty()){
-                displayError(Constants.NO_DATA_FOUND, true)
+                displayError(Constants.NO_DATA_FOUND)
             }else {
                 adapter.setAdapterList(it)
                 binding.rvShaadi.visibility = View.VISIBLE
                 binding.progressBar.visibility = View.GONE
                 binding.tvError.visibility = View.GONE
+                binding.tvRetry.visibility = View.GONE
             }
         }
     }
@@ -78,13 +79,13 @@ class HomeActivity : AppCompatActivity(), ShaadiUsersAdapter.OnAcceptDeclineList
     }
 
     @SuppressLint("LogNotTimber")
-    private fun displayError(errorMessage: String, isRetry : Boolean) {
+    private fun displayError(errorMessage: String) {
         binding.rvShaadi.visibility = View.GONE
         binding.progressBar.visibility = View.GONE
         binding.tvError.visibility = View.VISIBLE
         binding.tvError.text = errorMessage
         Log.d("responseValue", errorMessage)
-        binding.tvError.isVisible = isRetry
+        binding.tvRetry.visibility = View.VISIBLE
     }
 
     override fun onClick(shaadiUser: ShaadiUser) {
