@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Shaadi</string>
+    <string name="label_accept">Accept</string>
+    <string name="label_decline">Decline</string>
+    <string name="member_accepted">Member Accepted</string>
+    <string name="member_decline">Member Declined</string>
+    <string name="no_data_found">No Data Found. Please connect and retry</string>
+</resources>
